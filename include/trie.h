@@ -7,7 +7,7 @@ public:
 //constroctor
    Trie()
    {
-    root =new Node {'\0',true};
+    root =new Node {'\0',false};
    }
 //Node
 class Node
@@ -21,6 +21,7 @@ class Node
 };
 // member function
 void insert(const std::string& );
+bool search(const std::string& );
 //member var
     Node* root;
 private:
