@@ -10,6 +10,8 @@ void Trie::insert(const std::string& str)
         {
             a->children.push_back(new Node{str[i],false});
             a = a->children[0];
+            if(i==str.length()-1)
+                a->is_finished=true;
         }
     }
     //other times 
@@ -19,6 +21,7 @@ void Trie::insert(const std::string& str)
     bool same;
     bool first{true} ;
     bool loop_end{false};
+    std::cout<<"string length: "<<str.length()<<std::endl;
     if(init!=0)
     {
         for(size_t i{};i<str.length();i++)
@@ -26,7 +29,6 @@ void Trie::insert(const std::string& str)
             same =false ; 
             if(loop_end==false)
             {
-            // std::cout<<"latter"<<std::endl;
             for(size_t j{};j < b->children.size();j++)
             {
                 std::cout<<root->children.size()<<"and j= "<<j<<std::endl;
@@ -58,11 +60,12 @@ void Trie::insert(const std::string& str)
 
                 }
             }
-            if(str[i+1]=='\0')
+            if(i==str.length()-1)
             {
-                b->is_finished =true;
-            }
+                b->is_finished = true;
+            } 
         }
+
     }       
         std::cout<<str<<':'<<counter<<std::endl;
         std::cout<<"//////////"<<std::endl;
@@ -94,8 +97,51 @@ bool Trie::search(const std::string& query)
         }
     }
     if(is_same)
+    {
         std::cout<<"there are same"<<std::endl;
         return true;
+    }
     return false;
+}
+void Trie::bfs(std::function<void(Node*& node)> func)
+{
+    size_t counter{};
+    size_t countere{};
+    int j{};
+    Node* main{root};
+    Node* a{};
+    size_t l{};
+    func(main);
+    std::vector <Node*> b; 
+    for(int i{};i<main->children.size();i++)
+    {
+        
+        b.push_back(main->children[i]);
+        std::cout<<l<<": "<<b[l]->data<<std::endl;
+        l++;
+        if(main->children[i+1]==nullptr)
+        {
+            
+            main =b[counter];
+            while(b[counter]->is_finished==true)
+            {
+                std::cout<<"exception: "<<b[counter]->data<<std::endl;
+                 if(b[1+counter]->children.size()==0)
+                 {break;}
+                main =b[++counter] ;
+                
+             }
+            i=-1;
+            counter++ ; 
+        }
+    }
+
+    for(auto x:b)
+    {
+        // std::cout<<countere<<": "<<x->data<<std::endl;
+        func(x);
+        countere++;
+    }
+    std::cout<<"size: "<<b.size()<<std::endl;
 }
 

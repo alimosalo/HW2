@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <functional>
 class Trie
 {
 public:
@@ -22,6 +23,7 @@ class Node
 // member function
 void insert(const std::string& );
 bool search(const std::string& );
+void bfs(std::function<void(Node*& node)> func);
 //member var
     Node* root;
 private:
