@@ -1,17 +1,20 @@
 #include <iostream>
+#include <vector>
 #include "trie.h"
+template <class... E>
+void X(E&&... e) {
+    std::vector <std::string> v; 
+    int temp[] = {(v.push_back(e), 0)...};
+    std::cout<<v[0]<<std::endl;
+}
 int main(void)
 {
+    Trie trie{"hool","mull"};
+    trie.insert("this");
+    trie.insert("well");
+    std::vector<Trie::Node*>nodes; 
+    trie.bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
+    std::cout<<nodes.size()<<std::endl;
 
-    Trie::Node node{'a',false};
-    Trie::Node child1{'b',true};
-    Trie::Node child2{'c',false};
-    node.children.push_back(&child1);
-    Trie trie {};
-    trie.insert("there");
-    trie.insert("does");
-    trie.insert("that");
-    std::cout<<trie.root->children.size()<<std::endl;
-    std::cout<<trie.root->children[0]->children[0]->children[0]->data<<std::endl;
 
 }

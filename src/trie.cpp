@@ -107,25 +107,20 @@ void Trie::bfs(std::function<void(Node*& node)> func)
 {
     size_t counter{};
     size_t countere{};
-    int j{};
     Node* main{root};
     Node* a{};
-    size_t l{};
     func(main);
     std::vector <Node*> b; 
     for(int i{};i<main->children.size();i++)
     {
         
         b.push_back(main->children[i]);
-        std::cout<<l<<": "<<b[l]->data<<std::endl;
-        l++;
         if(main->children[i+1]==nullptr)
         {
             
             main =b[counter];
             while(b[counter]->is_finished==true)
             {
-                std::cout<<"exception: "<<b[counter]->data<<std::endl;
                  if(b[1+counter]->children.size()==0)
                  {break;}
                 main =b[++counter] ;
@@ -138,10 +133,44 @@ void Trie::bfs(std::function<void(Node*& node)> func)
 
     for(auto x:b)
     {
-        // std::cout<<countere<<": "<<x->data<<std::endl;
         func(x);
-        countere++;
     }
-    std::cout<<"size: "<<b.size()<<std::endl;
+    
 }
+Trie::Trie(const Trie& trie)
+{
+    size_t counter{};
+    Node * copy{new Node{'\0',false}};
+    Node * a{copy};
+    Node * main{trie.root};
+    std::vector<Node*> copy_vec;
+    std::vector<Node*> vec;
+    for(int i{};i<main->children.size();i++)
+    {
+        copy->children.push_back(new Node{main->children[i]->data,main->children[i]->is_finished});
+    std::cout<<copy->children[i]->data<<std::endl;
+        copy_vec.push_back(copy->children[i]);
+        vec.push_back(main->children[i]);
+        if(main->children[i+1]==nullptr)
+        {
+            while(vec[counter]->is_finished==true)
+            {
+                std::cout<<"end: "<<vec[counter]->data<<std::endl;
+                counter++;
+                if(vec[counter+1]==nullptr)
+                {break;}
+            }
+            copy=copy_vec[counter];
+            main=vec[counter];
+            
+            counter++ ; 
+            i =-1 ; 
+        }
+    } 
+    root =a ;
+
+}
+
+
+
 
