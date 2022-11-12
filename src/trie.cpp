@@ -105,32 +105,27 @@ bool Trie::search(const std::string& query)
 }
 void Trie::bfs(std::function<void(Node*& node)> func)
 {
-    size_t counter{};
-    size_t countere{};
-    Node* main{root};
-    Node* a{};
-    func(main);
+    Node* _root{root};
+    Node* next{root}; 
     std::vector <Node*> b; 
-    for(int i{};i<main->children.size();i++)
+    
+    size_t counter{};
+    b.push_back(next);
+    size_t i{} ;
+    size_t saver{};
+    while((_root=b[counter]))
     {
-        
-        b.push_back(main->children[i]);
-        if(main->children[i+1]==nullptr)
+        for(auto x:_root->children)
         {
+            std::cout<<x->data<<std::endl;
+            if(x==nullptr) {break;}
+            b.push_back(x);
             
-            main =b[counter];
-            while(b[counter]->is_finished==true)
-            {
-                 if(b[1+counter]->children.size()==0)
-                 {break;}
-                main =b[++counter] ;
-                
-             }
-            i=-1;
-            counter++ ; 
         }
+        std::cout<<"end"<<std::endl;
+        counter++;
     }
-
+       std::cout<<b.size()<<std::endl; 
     for(auto x:b)
     {
         func(x);

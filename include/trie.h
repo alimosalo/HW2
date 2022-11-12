@@ -30,18 +30,18 @@ public:
 
    Trie(const Trie& );
 // destructor
-// ~Trie()
-// {   std::cout<<"call distruct"<<std::endl;
-//     if(root == nullptr) return;
-//     std::vector<Node*> nodes;
-//     this->bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
-//         std::cout<<"yoooo"<<std::endl;
-//     for(const auto& node : nodes)
-//     {
-//         delete node;
-//     }
-//     std::cout<<"endl"<<std::endl;
-// }
+~Trie()
+{   std::cout<<"call distruct"<<std::endl;
+    if(root == nullptr) return;
+    std::vector<Node*> nodes;
+    this->bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
+        std::cout<<"yoooo"<<std::endl;
+    for(const auto& node : nodes)
+    {
+        delete node;
+    }
+    std::cout<<"endl"<<std::endl;
+}
 //Node
 class Node
 { 
