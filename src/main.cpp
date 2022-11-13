@@ -9,12 +9,18 @@ void X(E&&... e) {
 }
 int main(void)
 {
-    Trie trie{"hool","mull"};
-    trie.insert("this");
+    Trie trie{"guy"};
+    trie.insert("thatwwe");
+    trie.insert("green");
     trie.insert("well");
-    std::vector<Trie::Node*>nodes; 
-    trie.bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
-    std::cout<<nodes.size()<<std::endl;
+    // std::vector<Trie::Node*>nodes; 
+    // trie.bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
+    // std::cout<<nodes.size()<<std::endl;
+    Trie tree{};
+
+    tree = Trie{"fill","good"};
+    Trie truee("ller","test");
+    // std::cout<<tree.root->children[0]->data<<std::endl;
 
 
 }

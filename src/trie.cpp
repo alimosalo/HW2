@@ -171,7 +171,68 @@ Trie::Trie( Trie& trie)
     }    
     root =saver ;
 }
+void Trie::operator=(const Trie &trie)
+{
+     Node* _root{root} ;
+    Node* saver{_root}; 
+    _root =new Node{*trie.root};
+    saver = _root ; 
+    std::cout<<saver<<std::endl;
+    std::cout<<_root<<std::endl;
 
+
+
+
+
+    int counter{} ;
+    int i{} ; 
+    Node* __root{root} ; 
+    __root = new Node{trie.root->data,trie.root->is_finished};
+    root = __root; 
+    std::cout<<"first"<<root->is_finished<<std::endl;
+    std::vector<Node*> main ; 
+    std::vector<Node*> copy ; 
+    main.push_back(trie.root);
+
+    copy.push_back(root);
+    while((__root=main[counter]))
+    {
+        for(auto x:__root->children)
+        {
+            if(x==nullptr) {break;}
+            __root->children[i] = new Node{*x};
+
+            std::cout<<"i: "<<i<<" "<<__root->children[i]->data<<std::endl;
+            main.push_back(x); 
+            copy.push_back(x);
+            i++;
+        }
+        i = 0;
+        counter++;
+        __root = copy[counter];
+    }    
+    root =saver ;
+}
+//move semantics 
+Trie::Trie(Trie&& trie)
+{
+    Node* a{};
+    a = trie.root ; 
+    root =a ; 
+    trie.root = nullptr; 
+}
+void Trie::operator=( Trie&& trie)
+{
+    Node* a{}; 
+    a = trie.root ; 
+    root = a;
+    trie.root =nullptr; 
+
+
+
+
+
+}
 
 
 

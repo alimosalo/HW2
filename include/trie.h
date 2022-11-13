@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <functional>
-#include <cstdarg>
+#include <utility>
 class Trie
 {
 public:
@@ -13,9 +13,12 @@ public:
     std::cout<<this<<std::endl;
     root =new Node {'\0',false};
    }
-   template <typename ...T>
+   Trie(Trie&&);
+   Trie( Trie& );
+   template<typename ... T>
    Trie(T&& ... e)
    {
+    
     std::vector <std::string> vec; 
     int temp[] = {(vec.push_back(e),0)...};
     root = new Node {'\0',false};
@@ -28,20 +31,20 @@ public:
    }
    
 
-   Trie(const Trie& );
 // destructor
 ~Trie()
 {   std::cout<<"call distruct"<<std::endl;
     if(root == nullptr) return;
     std::vector<Node*> nodes;
     this->bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
-        std::cout<<"yoooo"<<std::endl;
     for(const auto& node : nodes)
     {
         delete node;
     }
-    std::cout<<"endl"<<std::endl;
 }
+//operator
+void operator=(const Trie& trie);
+void operator=( Trie&& trie);
 //Node
 class Node
 { 
