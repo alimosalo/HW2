@@ -33,7 +33,7 @@ public:
 
 // destructor
 ~Trie()
-{   std::cout<<"call distruct"<<std::endl;
+{   
     if(root == nullptr) return;
     std::vector<Node*> nodes;
     this->bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});

@@ -179,16 +179,16 @@
 //     EXPECT_EQ(nodes.size(), 16);
 // }
 
-// TEST(HW2Test, TEST17) {
+TEST(HW2Test, TEST17) {
 
-//     Trie equal{"there", "that", "this", "does", "did"};
-//     Trie::Node* address{equal.root};
+    Trie equal{"there", "that", "this", "does", "did"};
+    Trie::Node* address{equal.root};
 
-//     Trie trie{};
-//     trie = std::move(equal);
-//     EXPECT_EQ(address, trie.root);
+    Trie trie{};
+    trie = std::move(equal);
+    EXPECT_EQ(address, trie.root);
 
-//     std::vector<Trie::Node*> nodes;
-//     trie.bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
-//     EXPECT_EQ(nodes.size(), 16);
-// }
+    std::vector<Trie::Node*> nodes;
+    trie.bfs([&nodes](Trie::Node*& node){nodes.push_back(node);});
+    EXPECT_EQ(nodes.size(), 16);
+}

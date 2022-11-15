@@ -22,7 +22,6 @@ void Trie::insert(const std::string& str)
     bool same;
     bool first{true} ;
     bool loop_end{false};
-    std::cout<<"string length: "<<str.length()<<std::endl;
     if(init!=0)
     {
         for(size_t i{};i<str.length();i++)
@@ -32,10 +31,8 @@ void Trie::insert(const std::string& str)
             {
             for(size_t j{};j < b->children.size();j++)
             {
-                std::cout<<root->children.size()<<"and j= "<<j<<std::endl;
                 if(b->children[j]->data==str[i])
                 {
-                std::cout<<str<<": "<<str[i]<<"=="<<b->children[j]->data<<std::endl;
                     b = b->children[j] ; 
                      counter++;
                      
@@ -68,8 +65,6 @@ void Trie::insert(const std::string& str)
         }
 
     }       
-        std::cout<<str<<':'<<counter<<std::endl;
-        std::cout<<"//////////"<<std::endl;
         
 }
 //search function//////////////////////
@@ -85,10 +80,7 @@ bool Trie::search(const std::string& query)
                 
                 if(a->children[j]->data==query[i])
                 {
-                    std::cout<<query[i]<<"=="<<a->children[j]->data<<std::endl;
-                    std::cout<<"is_finished"<<a->is_finished<<std::endl;
                     if(a->children[j]->is_finished==true)
-                        std::cout<<"this is the end of it"<<std::endl;
                     if(a->children[j]->is_finished==true)
                         is_same =true;
                     a=a->children[j];
@@ -99,7 +91,6 @@ bool Trie::search(const std::string& query)
     }
     if(is_same)
     {
-        std::cout<<"there are same"<<std::endl;
         return true;
     }
     return false;
@@ -135,8 +126,6 @@ Trie::Trie( Trie& trie)
     Node* saver{_root}; 
     _root =new Node{*trie.root};
     saver = _root ; 
-    std::cout<<saver<<std::endl;
-    std::cout<<_root<<std::endl;
 
 
 
@@ -147,7 +136,6 @@ Trie::Trie( Trie& trie)
     Node* __root{root} ; 
     __root = new Node{trie.root->data,trie.root->is_finished};
     root = __root; 
-    std::cout<<"first"<<root->is_finished<<std::endl;
     std::vector<Node*> main ; 
     std::vector<Node*> copy ; 
     main.push_back(trie.root);
@@ -160,7 +148,6 @@ Trie::Trie( Trie& trie)
             if(x==nullptr) {break;}
             __root->children[i] = new Node{*x};
 
-            std::cout<<"i: "<<i<<" "<<__root->children[i]->data<<std::endl;
             main.push_back(x); 
             copy.push_back(x);
             i++;
@@ -189,7 +176,6 @@ void Trie::operator=(const Trie &trie)
     Node* __root{root} ; 
     __root = new Node{trie.root->data,trie.root->is_finished};
     root = __root; 
-    std::cout<<"first"<<root->is_finished<<std::endl;
     std::vector<Node*> main ; 
     std::vector<Node*> copy ; 
     main.push_back(trie.root);
@@ -202,7 +188,6 @@ void Trie::operator=(const Trie &trie)
             if(x==nullptr) {break;}
             __root->children[i] = new Node{*x};
 
-            std::cout<<"i: "<<i<<" "<<__root->children[i]->data<<std::endl;
             main.push_back(x); 
             copy.push_back(x);
             i++;
